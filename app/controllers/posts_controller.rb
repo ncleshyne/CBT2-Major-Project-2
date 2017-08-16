@@ -1,9 +1,14 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :like]
+  before_action :set_post, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :owned_post, only: [:edit, :update, :destroy]
   def index
     @posts = Post.all.order('created_at DESC').page params[:page]
+    if params[:tag]
+    @posts = Post.tagged_with(params[:tag])
+    else
+      @posts = Post.all
+    end
   end
 
   def show
@@ -24,7 +29,6 @@ class PostsController < ApplicationController
       render :new
     end
   end
-
   def edit
   end
 
@@ -37,12 +41,20 @@ class PostsController < ApplicationController
       render :edit
     end
   end
-  def like
-    if @post.liked_by current_user
-      respond_to do |format|
-        format.html { redirect_to :back }
-        format.js
-      end
+  def upvote 
+    @post = Post.find(params[:id])
+    @post.upvote_by current_user
+    respond_to do |format|
+    format.html { redirect_to posts_path }
+    format.js
+    end
+  end
+  def downvote
+    @post = Post.find(params[:id])
+    @post.downvote_by current_user
+    respond_to do |format|
+    format.html { redirect_to posts_path }
+    format.js
     end
   end
   def destroy
@@ -53,7 +65,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:image, :caption)
+    params.require(:post).permit(:image, :caption, :all_tags)
   end
 
   def set_post

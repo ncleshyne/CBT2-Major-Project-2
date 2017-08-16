@@ -1,21 +1,12 @@
 module PostsHelper
-def likers_of(post)
-    votes = post.votes_for.up.by_type(User)
-    user_names = []
-    unless votes.blank?
-      votes.voters.each do |voter|
-        user_names.push(link_to voter.user_name,
-                                profile_path(voter.user_name),
-                                class: 'user-name')
-      end
-      user_names.to_sentence.html_safe + like_plural(votes)
+    def tag_links(tags)
+        tags.split(",").map{|tag| link_to tag.strip, tag_path(tag.strip) }.join(", ") 
     end
-end
-
-private
-
-def like_plural(votes)
-return ' like this' if votes.count > 1
-' likes this'
-end
+    def tag_cloud(tags, classes)
+      max = tags.sort_by(&:count).last
+      tags.each do |tag|
+        index = tag.count.to_f / max.count * (classes.size-1)
+        yield(tag, classes[index.round])
+      end
+    end
 end
