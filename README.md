@@ -1,24 +1,15 @@
-# README
+# WRECKLAMO APP
+#### A site for complaints
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Introduction
+This app/website is the final project of Term 2 in the Vivixx Coding Bootcamp. Our instructor grouped us into two. My partner was [@deazee101](https://github.com/deazee101).
+It took a week of planning, coding and designing. It was pitched in front of investors on Aug 17 2017.
 
-Things you may want to cover:
+### Idea
+Wrecklamo from the word "Wreck" and the Filipino word "Reklamo" (which means complaint), aims to provide anonymity to users who post complaints online. It was designed just like the common social media sites like Facebook, Instagram, and Twitter; wherein users can post images, comment, customize their profiles and such. The one thing that separates this site from the majority is that its sole purpose is for posting complaints. 
 
-* Ruby version
+### Wireframe
+The live wireframe can be viewed here - [Figma](https://www.figma.com/file/YvUATn1996WHbNUfAZGujXjt/Untitled).
 
-* System dependencies
 
-* Configuration
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
